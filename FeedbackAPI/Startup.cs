@@ -17,6 +17,7 @@ namespace FeedbackAPI
 {
     public class Startup
     {
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -27,6 +28,16 @@ namespace FeedbackAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                                  builder =>
+                                  {
+                                      builder.WithOrigins("http://clientfeedback.azurewebsites.net",
+                                                          "https://clientfeedback.azurewebsites.net");
+                                  });
+            });
+
             services.AddControllers();
             services.AddScoped<ISubmitFeedback, SubmitFeedback>();
         }
@@ -50,10 +61,7 @@ namespace FeedbackAPI
                 endpoints.MapControllers();
             });
 
-            app.UseCors(policy =>
-                policy.WithOrigins("http://localhost:44379", "https://localhost:44379")
-                .AllowAnyMethod()
-                .WithHeaders(HeaderNames.ContentType));
+            app.UseCors(MyAllowSpecificOrigins);
         }
     }
 }
