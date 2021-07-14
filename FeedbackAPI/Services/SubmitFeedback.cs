@@ -31,7 +31,7 @@ namespace FeedbackAPI.Services
         public static CloudTable AuthTable()
         {
             string accountName = "unique841";
-            string accountKey = "iqXb548B2GuZDED/ZyhDDyqJcy3XkLlfY7X9TM0WL1znsDmTMs0aIkuUaBlc7xnt6snv2coOmwZe7NVSNWEwjA==";
+            string accountKey = "FaONSll3bRGGmeUGrmuXdSKYPbQqxQf8SmUFcGoFI6yh4NiM85+q5WGi+jgPYLp3ZSUbopEj1jWTp6K4Us3Czg==";
             try
             {
                 StorageCredentials creds = new StorageCredentials(accountName, accountKey);

@@ -17,7 +17,6 @@ namespace FeedbackAPI
 {
     public class Startup
     {
-        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -30,13 +29,10 @@ namespace FeedbackAPI
         {
             services.AddCors(options =>
             {
-                options.AddPolicy(name: MyAllowSpecificOrigins,
-                                  builder =>
-                                  {
-                                      builder.WithOrigins("http://clientfeedback.azurewebsites.net",
-                                                          "https://clientfeedback.azurewebsites.net")
-                                      .AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
-                                  });
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.WithOrigins("https://clientfeedback.azurewebsites.net");
+                });           
             });
 
             services.AddControllers();
@@ -54,6 +50,7 @@ namespace FeedbackAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseCors();
 
             app.UseAuthorization();
 
@@ -62,7 +59,7 @@ namespace FeedbackAPI
                 endpoints.MapControllers();
             });
 
-            app.UseCors(MyAllowSpecificOrigins);
+          
         }
     }
 }
