@@ -34,7 +34,8 @@ namespace FeedbackAPI
                                   builder =>
                                   {
                                       builder.WithOrigins("http://clientfeedback.azurewebsites.net",
-                                                          "https://clientfeedback.azurewebsites.net").AllowAnyHeader().AllowAnyMethod();
+                                                          "https://clientfeedback.azurewebsites.net")
+                                      .AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin();
                                   });
             });
 
