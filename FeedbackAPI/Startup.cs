@@ -51,7 +51,7 @@ namespace FeedbackAPI
             });
 
             app.UseCors(policy =>
-                policy.WithOrigins("http://localhost:5000", "https://localhost:5001")
+                policy.WithOrigins("http://localhost:44379", "https://localhost:44379")
                 .AllowAnyMethod()
                 .WithHeaders(HeaderNames.ContentType));
         }
