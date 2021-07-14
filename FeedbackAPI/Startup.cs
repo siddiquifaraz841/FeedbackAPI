@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Net.Http.Headers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,6 +49,11 @@ namespace FeedbackAPI
             {
                 endpoints.MapControllers();
             });
+
+            app.UseCors(policy =>
+                policy.WithOrigins("http://localhost:44379", "https://localhost:44379")
+                .AllowAnyMethod()
+                .WithHeaders(HeaderNames.ContentType));
         }
     }
 }
